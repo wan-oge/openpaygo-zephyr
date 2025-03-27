@@ -1,2 +1,12 @@
 # Copyright (c) 2021 Legrand North America, LLC.
 # SPDX-License-Identifier: Apache-2.0
+
+menuconfig OPENPAYGO
+    bool "OpenPAYGO Library"
+    default n
+    help
+      Enable OpenPAYGO library support.
+
+if OPENPAYGO
+rsource "Kconfig.token"
+endif
