@@ -13,3 +13,4 @@ manifest:
     - name: zephyr
       remote: zephyrproject-rtos
       revision: main
+      west-commands: scripts/west-commands.yml
