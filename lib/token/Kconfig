@@ -1,0 +1,44 @@
+# Copyright (c) 2024 Off-Grid Europe GmbH
+
+config OPENPAYGO_TOKEN
+	bool "Support for OpenPAYGO-Token library"
+	help
+	  This option enables the 'openpaygo-token' library
+
+if OPENPAYGO_TOKEN
+	config OPENPAYGO_TOKEN_RESTRICTED_DIGIT_SET_MODE
+		bool "OpenPAYGO-Token restricted digit set mode"
+		depends on OPENPAYGO_TOKEN
+		default n
+		help
+			This option is used to set the restricted digit setting for the library, if set to true, the library will only use the digits 1-4.
+
+	config OPENPAYGO_TOKEN_TIME_DIVIDER
+		int "OpenPAYGO-Token time divider"
+		depends on OPENPAYGO_TOKEN
+		default 1
+		help
+			This option is used to set the time divider setting for the library. The library usually expect the time in days, but if you want more granularity, you can set this value to 1, 24, 60 or 60*24 to have the time in seconds, minutes or hours.
+
+	config OPENPAYGO_TOKEN_MAX_TOKEN_JUMP
+		int "OpenPAYGO-Token max token jump"
+		depends on OPENPAYGO_TOKEN
+		default 64
+		help
+			This option is used to set the maximum token jump setting for the library. This value is used to prevent replay attacks, if the token is more than this value away from the expected token, the library will reject it.
+
+	config OPENPAYGO_TOKEN_MAX_TOKEN_JUMP_COUNTER_SYNC
+		int "OpenPAYGO-Token max token jump counter sync"
+		depends on OPENPAYGO_TOKEN
+		default 100
+		help
+			This option is used to set the maximum token jump counter sync setting for the library. This value is used to prevent replay attacks, if the token is more than this value away from the expected token, the library will reject it.
+
+	config OPENPAYGO_TOKEN_MAX_UNUSED_OLDER_TOKENS
+		int "OpenPAYGO-Token max unused older tokens"
+		range 0 32
+		depends on OPENPAYGO_TOKEN
+		default 16
+		help
+			This option is used to set the maximum unused older tokens setting for the library. This value is used to allow usage of add tokens that are older than the current token, but not too old.
+endif
